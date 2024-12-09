@@ -9,9 +9,9 @@ public class Vertice<T> {
 	private List<Aresta<T>> arestasSaida;
 
 	public Vertice(T valor) {
-		dado = valor;
-		arestasEntrada = new ArrayList<Aresta<T>>();
-		arestasSaida = new ArrayList<Aresta<T>>();
+		this.dado = valor;
+		this.arestasEntrada = new ArrayList<>();
+		this.arestasSaida = new ArrayList<>();
 	}
 
 	public T getDado() {
@@ -23,28 +23,29 @@ public class Vertice<T> {
 	}
 
 	public void addArestaEntrada(Aresta<T> aresta) {
-		arestasEntrada.add(aresta);
+		this.arestasEntrada.add(aresta);
 	}
 
 	public void addArestaSaida(Aresta<T> aresta) {
-		arestasSaida.add(aresta);
+		this.arestasSaida.add(aresta);
 	}
 
 	public List<Aresta<T>> getArestasEntrada() {
 		return arestasEntrada;
 	}
 
-	public void setArestasEntrada(List<Aresta<T>> restasEntrada) {
-		this.arestasEntrada = restasEntrada;
+	public void setArestasEntrada(List<Aresta<T>> arestasEntrada) {
+		this.arestasEntrada = arestasEntrada;
 	}
 
 	public List<Aresta<T>> getArestasSaida() {
 		return arestasSaida;
 	}
 
-	public void setArestasSaida(List<Aresta<T>> restasSaida) {
-		this.arestasSaida = restasSaida;
+	public void setArestasSaida(List<Aresta<T>> arestasSaida) {
+		this.arestasSaida = arestasSaida;
 	}
+
 	@Override
 	public String toString() {
 		return dado.toString();

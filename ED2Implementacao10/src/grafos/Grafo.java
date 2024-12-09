@@ -3,88 +3,68 @@ package grafos;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Grafo<T> {
+class Grafo<T> {
 	private List<Vertice<T>> vertices;
 	private List<Aresta<T>> arestas;
+	private int[][] matrizDeCustos;
+	private int numVertices;
 
-	public Grafo() {
-		// TODO Auto-generated constructor stub
-		vertices = new ArrayList<Vertice<T>>();
-		arestas = new ArrayList<Aresta<T>>();
+	public Grafo(int numVertices) {
+		this.numVertices = numVertices;
+		vertices = new ArrayList<>();
+		arestas = new ArrayList<>();
+		matrizDeCustos = new int[numVertices][numVertices];
 	}
 
 	public void addVertice(T dado) {
-		Vertice<T> novo = new Vertice<T>(dado);
-		vertices.add(novo);
+		vertices.add(new Vertice<>(dado));
 	}
 
-	public void addAresta(int peso, T disciplina, T professor) {
-		Vertice<T> inicio = getVertice(disciplina);
-		Vertice<T> fim = getVertice(professor);
+	public void addAresta(int peso, T inicio, T fim) {
+		Vertice<T> verticeInicio = getVertice(inicio);
+		Vertice<T> verticeFim = getVertice(fim);
+		if (verticeInicio != null && verticeFim != null) {
+			Aresta<T> aresta = new Aresta<>(peso, verticeInicio, verticeFim);
+			verticeInicio.addArestaSaida(aresta);
+			verticeFim.addArestaEntrada(aresta);
+			arestas.add(aresta);
 
-		Aresta<T> aresta = new Aresta<T>(peso, inicio, fim);
+			// Atualizar matriz de custos
+			int i = vertices.indexOf(verticeInicio);
+			int j = vertices.indexOf(verticeFim);
+			matrizDeCustos[i][j] = peso;
+		}
+	}
 
-		inicio.addArestaSaida(aresta);
-		fim.addArestaEntrada(aresta);
-		arestas.add(aresta);
+	public void atualizarPeso(T inicio, T fim, int novoPeso) {
+		Vertice<T> verticeInicio = getVertice(inicio);
+		Vertice<T> verticeFim = getVertice(fim);
+		if (verticeInicio != null && verticeFim != null) {
+			// Atualizar peso na lista de arestas
+			for (Aresta<T> aresta : arestas) {
+				if (aresta.getInicio().equals(verticeInicio) && aresta.getFim().equals(verticeFim)) {
+					aresta.setPeso(novoPeso);
+					break;
+				}
+			}
 
+			// Atualizar matriz de custos
+			int i = vertices.indexOf(verticeInicio);
+			int j = vertices.indexOf(verticeFim);
+			matrizDeCustos[i][j] = novoPeso;
+		}
 	}
 
 	public Vertice<T> getVertice(T dado) {
 		for (Vertice<T> vertice : vertices) {
-			if (vertice.getDado().equals(dado))
+			if (vertice.getDado().equals(dado)) {
 				return vertice;
+			}
 		}
 		return null;
 	}
 
-	public Vertice<T> getVertice(int dado) {
-
-		return vertices.get(dado);
+	public int[][] getMatrizDeCustos() {
+		return matrizDeCustos;
 	}
-
-	public Pilha<Vertice<T>> buscaProfundidade(T dado) {
-		Pilha<Vertice<T>> pilha = new Pilha<Vertice<T>>();
-
-		pilha.empilha(getVertice(dado));
-
-		while (!pilha.vazia()) {
-
-			for (Aresta<T> aresta : pilha.topopilha().getArestasSaida()) {
-				if (!pilha.existe(aresta.getFim())) {
-					pilha.empilha(aresta.getFim());
-				}
-			}
-
-			if (pilha.tamanho() == vertices.size())
-				break;
-
-		}
-		pilha.imprime();
-		return pilha;
-	}
-
-	public Pilha<Vertice<T>> buscaProfundidade(T inicio, T fim) {
-		Pilha<Vertice<T>> pilha = new Pilha<Vertice<T>>();
-
-		pilha.empilha(getVertice(inicio));
-
-		while (!pilha.vazia()) {
-
-			for (Aresta<T> aresta : pilha.topopilha().getArestasSaida()) {
-				if (pilha.topopilha().getDado().equals(fim))
-					break;
-
-				if (!pilha.existe(aresta.getFim())) {
-					pilha.empilha(aresta.getFim());
-				}
-			}
-
-			if (pilha.topopilha().getDado().equals(fim))
-				break;
-		}
-		pilha.imprime();
-		return pilha;
-	}
-
 }
