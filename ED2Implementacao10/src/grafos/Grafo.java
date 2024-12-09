@@ -36,25 +36,6 @@ class Grafo<T> {
 		}
 	}
 
-	public void atualizarPeso(T inicio, T fim, int novoPeso) {
-		Vertice<T> verticeInicio = getVertice(inicio);
-		Vertice<T> verticeFim = getVertice(fim);
-		if (verticeInicio != null && verticeFim != null) {
-			// Atualizar peso na lista de arestas
-			for (Aresta<T> aresta : arestas) {
-				if (aresta.getInicio().equals(verticeInicio) && aresta.getFim().equals(verticeFim)) {
-					aresta.setPeso(novoPeso);
-					break;
-				}
-			}
-
-			// Atualizar matriz de custos
-			int i = vertices.indexOf(verticeInicio);
-			int j = vertices.indexOf(verticeFim);
-			matrizDeCustos[i][j] = novoPeso;
-		}
-	}
-
 	public Vertice<T> getVertice(T dado) {
 		for (Vertice<T> vertice : vertices) {
 			if (vertice.getDado().equals(dado)) {

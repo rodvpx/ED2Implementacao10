@@ -22,25 +22,23 @@ public class Main {
 			grafo.addVertice(disciplina);
 		}
 
-		// Adicionando arestas e pesos iniciais
-		grafo.addAresta(2, "Nattane", "Desenvolvimento Web I");
-		grafo.addAresta(1, "Nattane", "Metodologia Científica");
-		grafo.addAresta(2, "Nattane", "Intro. Mineração de Dados");
-		grafo.addAresta(10, "Lucas", "Álgebra Linear");
-		grafo.addAresta(2, "Cristiane", "Banco de Dados II");
-		grafo.addAresta(1, "Cristiane", "Programação II");
-		grafo.addAresta(2, "Cristiane", "Elaboração de Projetos");
-		grafo.addAresta(1, "Junio", "Estrutura de Dados II");
-		grafo.addAresta(1, "Junio", "Programação Mobile");
-		grafo.addAresta(2, "Jean", "Redes de Computadores");
-		grafo.addAresta(1, "Jean", "Ética");
-		grafo.addAresta(1, "Paulo", "Eng. de Software");
-		grafo.addAresta(1, "Júlio", "Lógica");
-		grafo.addAresta(1, "Aumaury", "Sistemas Operacionais");
-		grafo.addAresta(1, "Gabriel", "Arquitetura de Software");
-		grafo.addAresta(1, "Lucas", "Marketing e Inovação");
-
-
+		// Adicionando arestas e pesos
+		grafo.addAresta(2, professores[0], disciplinas[0]); // Nattane -> Desenvolvimento Web I
+		grafo.addAresta(1, professores[0], disciplinas[5]); // Nattane -> Metodologia Científica
+		grafo.addAresta(2, professores[0], disciplinas[2]); // Nattane -> Intro. Mineração de Dados
+		grafo.addAresta(10, professores[1], disciplinas[1]); // Lucas -> Álgebra Linear
+		grafo.addAresta(2, professores[2], disciplinas[2]); // Cristiane -> Banco de Dados II
+		grafo.addAresta(1, professores[2], disciplinas[6]); // Cristiane -> Programação II
+		grafo.addAresta(2, professores[2], disciplinas[7]); // Cristiane -> Elaboração de Projetos
+		grafo.addAresta(1, professores[3], disciplinas[3]); // Junio -> Estrutura de Dados II
+		grafo.addAresta(1, professores[3], disciplinas[8]); // Junio -> Programação Mobile
+		grafo.addAresta(2, professores[4], disciplinas[4]); // Jean -> Redes de Computadores
+		grafo.addAresta(1, professores[4], disciplinas[9]); // Jean -> Ética
+		grafo.addAresta(1, professores[5], disciplinas[10]); // Paulo -> Eng. de Software
+		grafo.addAresta(1, professores[6], disciplinas[11]); // Júlio -> Lógica
+		grafo.addAresta(1, professores[7], disciplinas[12]); // Aumaury -> Sistemas Operacionais
+		grafo.addAresta(1, professores[8], disciplinas[13]); // Gabriel -> Arquitetura de Software
+		grafo.addAresta(1, professores[1], disciplinas[14]); // Lucas -> Marketing e Inovação
 
 		// Matriz de custos
 		int[][] costMatrix = {
